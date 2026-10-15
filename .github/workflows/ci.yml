@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  engine:
+    uses: BananaLabs-OSS/.github/.github/workflows/go-ci.yml@a4b55e64f0ce6de94eddb45f13a57b3458f6f9bb
+    with:
+      working-directory: engine
+
+  pith-adapter:
+    uses: BananaLabs-OSS/.github/.github/workflows/go-ci.yml@a4b55e64f0ce6de94eddb45f13a57b3458f6f9bb
+    with:
+      working-directory: adapters/pith
+      sibling-repositories: SirNiklas9/pith
+
+  cli:
+    uses: BananaLabs-OSS/.github/.github/workflows/go-ci.yml@a4b55e64f0ce6de94eddb45f13a57b3458f6f9bb
+    with:
+      working-directory: cmd/atlas
+      sibling-repositories: SirNiklas9/pith
